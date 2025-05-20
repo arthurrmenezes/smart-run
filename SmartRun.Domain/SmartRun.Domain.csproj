@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="BoundedContexts\AccountContext\ENUMs\" />
+    <Folder Include="BoundedContexts\AccountContext\DataTransferObject\" />
+    <Folder Include="BoundedContexts\TrainingContext\ENUMs\" />
+    <Folder Include="ValueObjects\" />
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
+</Project>
