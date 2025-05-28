@@ -23,12 +23,18 @@ public sealed class TrainingService : ITrainingService
             date: createTreinoDto.Date,
             accountId: accountId);
 
+        if (training is null)
+            throw new ArgumentNullException(nameof(training), "Training cannot be null.");
+
         await _trainingRepository.CreateTrainingAsync(training);
     }
 
     public async Task<GetTrainingDTO> GetTrainingByIdServiceAsync(Guid trainingId)
     {
         var training = await _trainingRepository.GetTrainingByIdAsync(trainingId);
+
+        if (training is null)
+            throw new KeyNotFoundException($"No training with ID {trainingId} was found.");
 
         var trainingDto = new GetTrainingDTO(
             id: training.Id,
@@ -44,6 +50,9 @@ public sealed class TrainingService : ITrainingService
     public async Task<GetTrainingDTO[]> GetAllTrainingsByAccountIdServiceAsync(Guid accountId)
     {
         var training = await _trainingRepository.GetAllTrainingsByAccountIdAsync(accountId);
+
+        if (training is null || training.Length == 0)
+            throw new KeyNotFoundException($"No trainings found for account ID {accountId}.");
 
         var trainingDto = training.Select(t => new GetTrainingDTO(
             id: t.Id,

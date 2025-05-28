@@ -21,19 +21,14 @@ public sealed class TrainingRepository : ITrainingRepository
     
     public async Task<Training> GetTrainingByIdAsync(Guid trainingId)
     {
-        var training = await _dataContext.Trainings
+        return await _dataContext.Trainings
             .FirstOrDefaultAsync(t => t.Id == trainingId);
-        if (training is null)
-            throw new Exception($"There is no training with ID {trainingId}.");
-        return training;
     }
 
     public async Task<Training[]> GetAllTrainingsByAccountIdAsync(Guid accountId)
     {
-        var training = await _dataContext.Trainings
+        return await _dataContext.Trainings
             .Where(t => t.AccountId == accountId)
             .ToArrayAsync();
-
-        return training;
     }
 }

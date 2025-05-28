@@ -23,8 +23,17 @@ public sealed class TrainingController : ControllerBase
         await _trainingService.CreateTrainingServiceAsync(
             accountId: Guid.NewGuid(),
             createTrainingDto: createTrainingDto);
+
+        return StatusCode(StatusCodes.Status201Created);
+    }
+
+    [HttpGet]
+    [Route("{trainingId}")]
+    public async Task<IActionResult> GetTrainingByIdAsync([FromQuery] Guid trainingId)
+    {
+        var training = await _trainingService.GetTrainingByIdServiceAsync(trainingId);
         
-        return StatusCode(StatusCodes.Status201Created);   
+        return Ok(training);
     }
 
     [HttpGet]
