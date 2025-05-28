@@ -1,12 +1,10 @@
 ﻿using SmartRun.Domain.BoundedContexts.TrainingContext.ENUMs;
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartRun.Domain.BoundedContexts.TrainingContext.Entities;
+namespace SmartRun.Application.Services.TrainingContext.DataTransferObject;
 
-public class Training
+public sealed record CreateTrainingDTO
 {
-    [Key]
-    public Guid Id { get; set; }
     [Required]
     public LocationType Location { get; set; }
     [Required]
@@ -15,15 +13,13 @@ public class Training
     public TimeSpan Duration { get; set; }
     [Required]
     public DateTime Date { get; set; }
-    [Required]
-    public Guid AccountId { get; set; }
 
-    public Training(LocationType location, double distance, TimeSpan duration, DateTime date, Guid accountId)
+    public CreateTrainingDTO(LocationType location, double distance, TimeSpan duration, DateTime date)
     {
         Location = location;
         Distance = distance;
         Duration = duration;
         Date = date;
-        AccountId = accountId;
     }
 }
+

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\SmartRun.Domain\SmartRun.Domain.csproj" />
+    <ProjectReference Include="..\SmartRun.Infrastructure\SmartRun.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
