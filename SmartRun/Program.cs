@@ -1,7 +1,6 @@
 using SmartRun.Application;
-using SmartRun.Application.Services.TrainingContext;
-using SmartRun.Application.Services.TrainingContext.Interfaces;
 using SmartRun.Infrastructure;
+using SmartRun.WebApi.Middleware;
 
 public class Program
 {
@@ -21,7 +20,6 @@ public class Program
 
         #region Application Dependencies Configuration
 
-        builder.Services.AddScoped<ITrainingService, TrainingService>();
         builder.Services.ApplyApplicationDependenciesConfiguration();
 
         #endregion
@@ -31,6 +29,13 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
+
+        #region Middleware Configuration
+
+        app.UseMiddleware<ExceptionMiddleware>();
+
+        #endregion
+
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
