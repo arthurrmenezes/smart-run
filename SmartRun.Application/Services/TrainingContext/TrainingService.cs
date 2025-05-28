@@ -64,4 +64,38 @@ public sealed class TrainingService : ITrainingService
 
         return trainingDto;
     }
+
+    public async Task RemoveTrainingServiceAsync(Guid trainingId)
+    {
+        var training = await _trainingRepository.GetTrainingByIdAsync(trainingId);
+        
+        if (training is null)
+            throw new KeyNotFoundException($"No training with ID {trainingId} was found.");
+
+        await _trainingRepository.RemoveTrainingAsync(training);
+    }
+
+    public async Task<GetTrainingDTO> UpdateTrainingServiceAsync(Guid trainingId, UpdateTrainingDTO updateTrainingDTO)
+    { //verificar se o training pertence a conta que está tentando atualizar
+        var training = await _trainingRepository.GetTrainingByIdAsync(trainingId);
+
+        if (training is null)
+            throw new KeyNotFoundException($"No training with ID {trainingId} was found.");
+
+        training.Location = updateTrainingDTO.Location;
+        training.Distance = updateTrainingDTO.Distance;
+        training.Duration = updateTrainingDTO.Duration;
+        training.Date = updateTrainingDTO.Date;
+        training.AccountId = Guid.Parse("C938804B-9417-427C-948F-36F7D621373A");
+
+        await _trainingRepository.UpdateTrainingByIdAsync(training);
+
+        return new GetTrainingDTO(
+            id: training.Id,
+            location: training.Location,
+            distance: training.Distance,
+            duration: training.Duration,
+            date: training.Date,
+            accountId: training.AccountId);
+    }
 }

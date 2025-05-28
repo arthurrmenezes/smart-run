@@ -31,4 +31,17 @@ public sealed class TrainingRepository : ITrainingRepository
             .Where(t => t.AccountId == accountId)
             .ToArrayAsync();
     }
+
+    public async Task RemoveTrainingAsync(Training training)
+    {
+        _dataContext.Trainings.Remove(training);
+        await _dataContext.SaveChangesAsync();
+    }
+
+    public async Task<Training> UpdateTrainingByIdAsync(Training training)
+    {
+        _dataContext.Trainings.Update(training);
+        await _dataContext.SaveChangesAsync();
+        return training;
+    }
 }

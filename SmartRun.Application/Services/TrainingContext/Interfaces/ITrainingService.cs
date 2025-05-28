@@ -10,9 +10,9 @@ public interface ITrainingService
 
     public Task<GetTrainingDTO[]> GetAllTrainingsByAccountIdServiceAsync(Guid accountId);
 
-    //public Task UpdateTrainingServiceAsync(int trainingId, CreateTrainingDTO createTreinoDto);
+    public Task RemoveTrainingServiceAsync(Guid trainingId);
 
-    //public Task RemoveTrainingServiceAsync(int trainingId);
+    public Task<GetTrainingDTO> UpdateTrainingServiceAsync(Guid trainingId, UpdateTrainingDTO updateTrainingDTO);
 
     //public Task<GetTrainingDTO> GetFasterTraining2kmServiceAsync();
 

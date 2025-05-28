@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SmartRun.Infrastructure.Data.Repositories;
-using SmartRun.Infrastructure.Data.Repositories.Interfaces;
+using SmartRun.Application.Services.TrainingContext;
+using SmartRun.Application.Services.TrainingContext.Interfaces;
 
 namespace SmartRun.Application;
 
@@ -8,7 +8,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection ApplyApplicationDependenciesConfiguration(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<ITrainingRepository, TrainingRepository>();
+        serviceCollection.AddScoped<ITrainingService, TrainingService>();
 
         return serviceCollection;
     }

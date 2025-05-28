@@ -29,18 +29,38 @@ public sealed class TrainingController : ControllerBase
 
     [HttpGet]
     [Route("{trainingId}")]
-    public async Task<IActionResult> GetTrainingByIdAsync([FromQuery] Guid trainingId)
+    public async Task<IActionResult> GetTrainingByIdAsync(
+        [FromRoute] Guid trainingId)
     {
         var training = await _trainingService.GetTrainingByIdServiceAsync(trainingId);
-        
         return Ok(training);
     }
 
     [HttpGet]
     [Route("all")]
-    public async Task<IActionResult> GetAllTrainingsByAccountIdAsync([FromQuery] Guid accountId)
+    public async Task<IActionResult> GetAllTrainingsByAccountIdAsync(
+        [FromQuery] Guid accountId)
     {
         var trainings = await _trainingService.GetAllTrainingsByAccountIdServiceAsync(accountId);
         return Ok(trainings);
+    }
+
+    [HttpDelete]
+    [Route("delete")]
+    public async Task<IActionResult> RemoveTrainingAsync(
+        [FromQuery] Guid trainingId)
+    {
+        await _trainingService.RemoveTrainingServiceAsync(trainingId);
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("update/{trainingId}")]
+    public async Task<IActionResult> UpdateTrainingAsync(
+        [FromRoute] Guid trainingId,
+        [FromBody] UpdateTrainingDTO updateTrainingDTO)
+    {
+        var training = await _trainingService.UpdateTrainingServiceAsync(trainingId, updateTrainingDTO);
+        return Ok(training);
     }
 }
