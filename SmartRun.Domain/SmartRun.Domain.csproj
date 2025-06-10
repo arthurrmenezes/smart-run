@@ -6,10 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="BoundedContexts\AccountContext\ENUMs\" />
-    <Folder Include="ValueObjects\" />
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
 </Project>
