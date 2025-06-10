@@ -2,10 +2,10 @@
 
 namespace SmartRun.Domain.BoundedContexts.TrainingContext.ENUMs;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum LocationType
 {
     GYM = 0,
     PARK = 1,
-    TRACK = 2
+    TRACK = 2,
+    STREET = 3
 }

@@ -12,8 +12,8 @@ using SmartRun.Infrastructure.Data;
 namespace SmartRun.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250528150112_fix_location_enum_to_string_mapping")]
-    partial class fix_location_enum_to_string_mapping
+    [Migration("20250610171506_add_table_training_on_database")]
+    partial class add_table_training_on_database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,11 +28,13 @@ namespace SmartRun.Infrastructure.Migrations
             modelBuilder.Entity("SmartRun.Domain.BoundedContexts.TrainingContext.Entities.Training", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AccountId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -45,11 +47,12 @@ namespace SmartRun.Infrastructure.Migrations
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Trainings");
+                    b.ToTable("trainings", (string)null);
                 });
 #pragma warning restore 612, 618
         }

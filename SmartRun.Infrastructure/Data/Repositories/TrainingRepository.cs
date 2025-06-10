@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRun.Domain.BoundedContexts.TrainingContext.Entities;
+using SmartRun.Domain.ValueObjects;
 using SmartRun.Infrastructure.Data.Repositories.Interfaces;
 
 namespace SmartRun.Infrastructure.Data.Repositories;
@@ -18,11 +19,11 @@ public sealed class TrainingRepository : ITrainingRepository
         await _dataContext.Trainings.AddAsync(training);
         await _dataContext.SaveChangesAsync();
     }
-    
-    public async Task<Training> GetTrainingByIdAsync(Guid trainingId)
+
+    public async Task<Training> GetTrainingByIdAsync(IdValueObject trainingId)
     {
         return await _dataContext.Trainings
-            .FirstOrDefaultAsync(t => t.Id == trainingId);
+            .FirstOrDefaultAsync(t => t.Id.Equals(trainingId));
     }
 
     public async Task<Training[]> GetAllTrainingsByAccountIdAsync(Guid accountId)
@@ -38,7 +39,7 @@ public sealed class TrainingRepository : ITrainingRepository
         await _dataContext.SaveChangesAsync();
     }
 
-    public async Task<Training> UpdateTrainingByIdAsync(Training training)
+    public async Task<Training> UpdateTrainingAsync(Training training)
     {
         _dataContext.Trainings.Update(training);
         await _dataContext.SaveChangesAsync();

@@ -28,6 +28,11 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddMvc(options =>
+        {
+            options.SuppressAsyncSuffixInActionNames = false;
+        });
+
         var app = builder.Build();
 
         #region Middleware Configuration

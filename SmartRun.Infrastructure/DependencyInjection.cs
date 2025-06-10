@@ -17,12 +17,13 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         serviceCollection.AddDbContext<DataContext>(options =>
-        options.UseSqlServer(connectionString, 
+        options.UseSqlServer(connectionString,
         sqlOption => sqlOption.MigrationsAssembly("SmartRun.Infrastructure")));
 
         #endregion
 
         serviceCollection.AddScoped<ITrainingRepository, TrainingRepository>();
+        serviceCollection.AddScoped<IAccountRepository, AccountRepository>();
 
         return serviceCollection;
     }

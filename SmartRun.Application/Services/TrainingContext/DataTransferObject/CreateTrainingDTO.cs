@@ -6,13 +6,13 @@ namespace SmartRun.Application.Services.TrainingContext.DataTransferObject;
 public sealed record CreateTrainingDTO
 {
     [Required]
-    public LocationType Location { get; set; }
+    public LocationType Location { get; init; }
     [Required]
-    public double Distance { get; set; }
+    public double Distance { get; init; }
     [Required]
-    public TimeSpan Duration { get; set; }
+    public TimeSpan Duration { get; init; }
     [Required]
-    public DateTime Date { get; set; }
+    public DateTime Date { get; init; }
 
     public CreateTrainingDTO(LocationType location, double distance, TimeSpan duration, DateTime date)
     {
@@ -22,4 +22,3 @@ public sealed record CreateTrainingDTO
         Date = date;
     }
 }
-

@@ -12,19 +12,20 @@ namespace SmartRun.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Trainings",
+                name: "trainings",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Distance = table.Column<double>(type: "float", nullable: false),
                     Duration = table.Column<TimeSpan>(type: "time", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trainings", x => x.Id);
+                    table.PrimaryKey("PK_trainings", x => x.Id);
                 });
         }
 
@@ -32,7 +33,7 @@ namespace SmartRun.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Trainings");
+                name: "trainings");
         }
     }
 }

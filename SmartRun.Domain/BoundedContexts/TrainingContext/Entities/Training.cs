@@ -1,29 +1,29 @@
 ﻿using SmartRun.Domain.BoundedContexts.TrainingContext.ENUMs;
-using System.ComponentModel.DataAnnotations;
+using SmartRun.Domain.ValueObjects;
 
 namespace SmartRun.Domain.BoundedContexts.TrainingContext.Entities;
 
 public class Training
 {
-    [Key]
-    public Guid Id { get; set; }
-    [Required]
+    public IdValueObject Id { get; set; }
     public LocationType Location { get; set; }
-    [Required]
     public double Distance { get; set; }
-    [Required]
     public TimeSpan Duration { get; set; }
-    [Required]
     public DateTime Date { get; set; }
-    [Required]
-    public Guid AccountId { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public IdValueObject AccountId { get; set; }
 
-    public Training(LocationType location, double distance, TimeSpan duration, DateTime date, Guid accountId)
+    private Training(LocationType location, double distance, TimeSpan duration, DateTime date, IdValueObject accountId)
     {
+        Id = IdValueObject.New();
         Location = location;
         Distance = distance;
         Duration = duration;
         Date = date;
+        CreatedAt = DateTime.UtcNow;
         AccountId = accountId;
     }
+
+    public static Training Factory(LocationType location, double distance, TimeSpan duration, DateTime date, IdValueObject accountId)
+        => new Training(location, distance, duration, date, accountId);
 }

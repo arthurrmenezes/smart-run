@@ -1,18 +1,21 @@
 ﻿using SmartRun.Application.Services.TrainingContext.DataTransferObject;
+using SmartRun.Domain.ValueObjects;
 
 namespace SmartRun.Application.Services.TrainingContext.Interfaces;
 
 public interface ITrainingService
 {
-    public Task CreateTrainingServiceAsync(Guid accountId, CreateTrainingDTO createTrainingDto);
+    public Task<GetTrainingDTO> CreateTrainingServiceAsync(IdValueObject accountId, CreateTrainingDTO createTrainingDto);
 
-    public Task<GetTrainingDTO> GetTrainingByIdServiceAsync(Guid trainingId);
+    public Task<GetTrainingDTO> GetTrainingByIdServiceAsync(IdValueObject trainingId);
 
-    public Task<GetTrainingDTO[]> GetAllTrainingsByAccountIdServiceAsync(Guid accountId);
+    public Task<GetTrainingDTO[]> GetAllTrainingsByAccountIdServiceAsync(IdValueObject accountId);
 
-    public Task RemoveTrainingServiceAsync(Guid trainingId);
+    public Task RemoveTrainingByIdServiceAsync(IdValueObject trainingId);
 
-    public Task<GetTrainingDTO> UpdateTrainingServiceAsync(Guid trainingId, UpdateTrainingDTO updateTrainingDTO);
+    public Task<GetTrainingDTO> UpdateTrainingByIdServiceAsync(IdValueObject trainingId, UpdateTrainingDTO updateTrainingDTO);
+
+
 
     //public Task<GetTrainingDTO> GetFasterTraining2kmServiceAsync();
 
